@@ -1,0 +1,33 @@
+# --- Archivos Auxiliares de Compilación (Core LaTeX) ---
+*.aux
+*.log
+*.out
+*.toc
+*.dvi
+*.lof
+*.lot
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+
+# --- Archivos específicos de Beamer (Presentaciones) ---
+# Estos se generan automáticamente para la navegación de los slides
+*.nav
+*.snm
+*.vrb
+
+# --- Archivos temporales de editores ---
+# Si usas VS Code (LaTeX Workshop), TeXStudio, o Texmaker
+*.bak
+*.sav
+*.tmp
+*~
+*.backup
+
+# --- Archivos de sistema ---
+.DS_Store
+Thumbs.db
