@@ -1,0 +1,230 @@
+\documentclass[aspectratio=169]{beamer}
+
+% --- TEMA Y COLORES ---
+\usetheme{Madrid}
+\usecolortheme{dolphin} % Tema azul profesional
+
+% --- PAQUETES ---
+\usepackage[spanish]{babel} % Idioma español
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}       % Tablas estéticas
+\usepackage{graphicx}       % Imágenes
+
+% --- METADATOS ---
+\title[Informe Técnico Final]{Informe Técnico Final \\ Implementación Pipeline CI/CD}
+\subtitle{Proyecto Bookztron}
+\author{Harold Alexis Victor Canto Vidal}
+\institute{Curso: Prueba y Verificación de Software}
+\date{28 de Noviembre, 2025}
+
+\begin{document}
+
+% --- SLIDE 1: TÍTULO ---
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% --- SLIDE 2: RESUMEN EJECUTIVO ---
+\begin{frame}{Resumen Ejecutivo}
+    \begin{block}{Objetivo Principal}
+        Diseñar e implementar un flujo de trabajo automático (Pipeline CI/CD) en \textbf{GitLab} para validación continua.
+    \end{block}
+
+    \vspace{0.5cm}
+
+    \begin{block}{Logros Clave}
+        \begin{itemize}
+            \item \textbf{Funcionalidad:} Pruebas unitarias y de interfaz integradas.
+            \item \textbf{Seguridad:} Escaneos de vulnerabilidades automatizados.
+            \item \textbf{Rendimiento:} Pruebas de carga y estrés en la infraestructura.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- SLIDE 3: ARQUITECTURA ---
+\begin{frame}{Arquitectura e Infraestructura}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \textbf{Diseño del Pipeline:}
+            \begin{itemize}
+                \item 10 etapas secuenciales y paralelas (Build, Test, Security, Analyze, Quality Gate, Performance).
+            \end{itemize}
+            
+            \vspace{0.5cm}
+            
+            \textbf{Runners Locales (Híbrido):}
+            \begin{itemize}
+                \item \textbf{Laptop MSI (\#50601279):} Ejecuciones ágiles.
+                \item \textbf{PC Escritorio (\#50583101):} Carga pesada.
+            \end{itemize}
+
+        \column{0.5\textwidth}
+            % Placeholder para la imagen de arquitectura
+            \begin{figure}
+                \centering
+                \framebox{\parbox[c][5cm][c]{0.9\textwidth}{\centering
+                    \textbf{Diagrama de Arquitectura} \\
+                    \small (Insertar imagen aquí)
+                }}
+            \end{figure}
+    \end{columns}
+\end{frame}
+
+% --- SLIDE 4: MATRIZ DE HERRAMIENTAS ---
+\begin{frame}{Matriz de Herramientas y Resultados}
+    \begin{table}
+        \centering
+        \small
+        \begin{tabular}{lllc}
+            \toprule
+            \textbf{Prueba} & \textbf{Herramienta} & \textbf{Resultado Clave} & \textbf{Estado} \\
+            \midrule
+            Estilo & ESLint & Cumple reglas (Google/Airbnb) & \textcolor{green!60!black}{\textbf{Bien}} \\
+            Unitarias & Jest & 40.5\% Cobertura & \textcolor{orange}{\textbf{Mejorar}} \\
+            API & Newman & Respuestas rápidas ($\sim$200ms) & \textcolor{green!60!black}{\textbf{Bien}} \\
+            UI & Selenium & Fallos de diseño (CSS) & \textcolor{orange}{\textbf{Hallazgos}} \\
+            Rendimiento & JMeter & Pasarela lenta (5-8s) & \textcolor{red}{\textbf{Crítico}} \\
+            Seguridad & OWASP ZAP & Faltan headers de seguridad & \textcolor{orange}{\textbf{Alerta}} \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+\end{frame}
+
+% --- SLIDE 5: UNITARIAS Y API ---
+\begin{frame}{Detalles: Unitarias y API}
+    \begin{itemize}
+        \item \textbf{Pruebas Unitarias (Jest):}
+        \begin{itemize}
+            \item Resultado actual: \textbf{40.5\% de Cobertura}.
+            \item Análisis: El código pasa las pruebas, pero la cobertura es insuficiente para garantizar estabilidad total.
+        \end{itemize}
+        
+        \vspace{1cm}
+        
+        \item \textbf{Pruebas de API (Newman):}
+        \begin{itemize}
+            \item Resultado: Backend simulado responde correctamente.
+            \item Status: \textbf{200 OK} en todos los endpoints críticos.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- SLIDE 6: VISUALES Y RENDIMIENTO ---
+\begin{frame}{Detalles: Visuales y Rendimiento}
+    \begin{columns}
+        \column{0.6\textwidth}
+            \begin{block}{Pruebas Visuales (Selenium)}
+                \begin{itemize}
+                    \item Hallazgo: "Parpadeo" inicial en menú de navegación.
+                    \item Impacto: Afecta la percepción de calidad del usuario.
+                \end{itemize}
+            \end{block}
+            
+            \vspace{0.5cm}
+            
+            \begin{alertblock}{Rendimiento (JMeter) - Crítico}
+                \begin{itemize}
+                    \item Cuello de Botella: Flujo de pagos.
+                    \item Tiempos: \textbf{5 a 8 segundos} (Inaceptable para producción).
+                \end{itemize}
+            \end{alertblock}
+            
+        \column{0.4\textwidth}
+            % Placeholder para gráfico JMeter
+            \begin{figure}
+                \centering
+                \framebox{\parbox[c][4cm][c]{0.9\textwidth}{\centering
+                    \small Gráfico JMeter
+                }}
+            \end{figure}
+    \end{columns}
+\end{frame}
+
+% --- SLIDE 7: SEGURIDAD Y CALIDAD ---
+\begin{frame}{Seguridad y Calidad de Código}
+    \begin{itemize}
+        \item \textbf{Seguridad (OWASP ZAP):}
+        \begin{itemize}
+            \item Vulnerabilidad: Ausencia de cabeceras HTTP de seguridad.
+            \item Vulnerabilidad: Falta de \textbf{CAPTCHA} en login (Riesgo bots).
+        \end{itemize}
+        
+        \vspace{0.8cm}
+        
+        \item \textbf{Calidad (SonarQube):}
+        \begin{itemize}
+            \item Calificación General: \textbf{A}.
+            \item Deuda Técnica: 10 errores menores y 11 Security Hotspots a revisar.
+            \item Quality Gate: \textbf{Aprobado}.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- SLIDE 8: GESTIÓN DE ERRORES ---
+\begin{frame}{Gestión de Errores - Hallazgos Críticos}
+    \textbf{Registro en MantisBT:}
+    
+    \vspace{0.5cm}
+    
+    \begin{enumerate}
+        \item \textbf{\textcolor{red}{[CRÍTICA] ID 0000015:}} Pagos Lentos (5-8s).
+        \item \textbf{\textcolor{orange}{[ALTA] ID 0000013:}} Login sin CAPTCHA (Riesgo Fuerza Bruta).
+        \item \textbf{\textcolor{orange}{[ALTA] ID 0000016:}} Inconsistencia en Carrito (No sincroniza entre pestañas).
+        \item \textbf{\textcolor{green!60!black}{[MEDIA] ID 0000014:}} Persistencia de preferencias tras Logout.
+    \end{enumerate}
+\end{frame}
+
+% --- SLIDE 9: ANÁLISIS CRÍTICO ---
+\begin{frame}{Análisis Crítico del Proyecto}
+    \begin{block}{Infraestructura}
+        \begin{itemize}
+            \item \textbf{Pros:} Runners propios reducen costos y tiempos.
+            \item \textbf{Contras:} Riesgos operativos (cortes de luz/red) en entorno local.
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.3cm}
+    
+    \begin{block}{Estrategia de Pruebas}
+        Existe un desbalance: Alta dependencia de pruebas E2E y poca cobertura unitaria.
+    \end{block}
+
+    \vspace{0.3cm}
+
+    \begin{block}{Seguridad}
+        Integración tardía, faltando enfoque "Shift-Left" desde el diseño.
+    \end{block}
+\end{frame}
+
+% --- SLIDE 10: CONCLUSIONES ---
+\begin{frame}{Conclusiones y Futuro}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \textbf{Éxitos del Proyecto:}
+            \begin{itemize}
+                \item Automatización total (JS/Java/Python).
+                \item Infraestructura híbrida funcional.
+                \item Trazabilidad completa en MantisBT.
+            \end{itemize}
+        
+        \column{0.5\textwidth}
+            \textbf{Acciones Futuras:}
+            \begin{itemize}
+                \item Elevar cobertura Jest $>$ 80\%.
+                \item Optimizar base de datos para pagos.
+                \item Hardening de seguridad antes de producción.
+            \end{itemize}
+    \end{columns}
+\end{frame}
+
+% --- SLIDE 11: PREGUNTAS ---
+\begin{frame}
+    \centering
+    \Huge \textcolor{structure}{¿Preguntas?}
+    
+    \vspace{1cm}
+    
+    \Large Gracias por su atención.
+\end{frame}
+
+\end{document}
